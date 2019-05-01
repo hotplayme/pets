@@ -1,1 +1,5 @@
-edit.html.erb
+<%= form_for @article, url: admin_article_path(@article) do |f| %>
+  <p><%= f.label :title %><%= f.text_field :title %></p>
+  <p><%= f.label :body %><%= f.text_area :body %></p>
+  <p><%= f.submit 'Save' %></p>
+<% end %>
