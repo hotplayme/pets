@@ -25,6 +25,22 @@ RSpec.feature 'Articles', type: feature do
     expect(page).to have_link('Edit')
   end
 
+  scenario 'user create article with image' do
+    visit '/admin/articles'
+    click_on 'Add'
+
+    fill_in 'article_title', with: 'New Article Title'
+    fill_in 'article_body',  with: 'New Article Body'
+    attach_file 'article_article_image', 'spec/tmp/image.jpg'
+    click_button 'Add'
+
+    expect(page).to have_current_path(admin_article_path(Article.last))
+    expect(page).to have_text('New Article Title')
+    expect(page).to have_text('New Article Body')
+    expect(page).to have_css("img[src*='#{Article.last.article_images.last.file}.jpg']")
+    expect(page).to have_link('Edit')
+  end
+
   scenario 'user edit article' do
     article = create(:article)
     visit '/admin/articles'

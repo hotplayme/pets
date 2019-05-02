@@ -5,6 +5,7 @@ ruby '2.6.0'
 
 gem 'rails', '~> 5.2.3'
 gem 'pg'
+gem 'mime-types'
 gem 'puma', '~> 3.11'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
@@ -34,6 +35,10 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'capybara'
   gem 'launchy'
+end
+
+group :test do
+  gem 'shoulda-matchers'
 end
 
 group :development do

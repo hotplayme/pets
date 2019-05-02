@@ -5,7 +5,9 @@ class Admin::ArticlesController < ApplicationController
   end
 
   def show
-    unless @article = Article.find_by_id(params[:id])
+    if @article = Article.find_by_id(params[:id])
+      @images = @article.article_images
+    else
       redirect_to admin_articles_path
     end
   end
@@ -17,6 +19,12 @@ class Admin::ArticlesController < ApplicationController
   def create
     @article = Article.new(article_params)
     if @article.save
+      if params[:article][:article_image].present?
+        params[:article][:article_image].each do |image|
+          article_image = @article.article_images.create(file: (0...8).map { (65 + rand(26)).chr }.join.downcase)
+          article_image.upload(image)
+        end
+      end
       redirect_to admin_article_path(@article)
     else
       render :new

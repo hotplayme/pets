@@ -1,29 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe 'Article', type: :model do
+RSpec.describe Article, type: :model do
 
-  context 'Validation' do
-
-    it 'should presense of title' do
-      Article.create(body: 'Body')
-      expect(Article.count).to eq(0)
-    end
-
-    it 'should presense of body' do
-      Article.create(title: 'title')
-      expect(Article.count).to eq(0)
-    end
-
-    it "minimum title 5 digits" do
-      Article.create(title: 'tit', body: 'Body Body Body')
-      expect(Article.count).to eq(0)
-    end
-
-    it "minimum body 5 digits" do
-      Article.create(title: 'Title Title', body: 'Body')
-      expect(Article.count).to eq(0)
-    end
-
-  end
+  it { should validate_presence_of(:title) }
+  it { should validate_presence_of(:body) }
+  it { should validate_length_of(:title).is_at_least(5) }
+  it { should validate_length_of(:body).is_at_least(5) }
+  it { should have_many :article_images }
 
 end

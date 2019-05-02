@@ -22,7 +22,8 @@ RSpec.describe Admin::ArticlesController do
   end
 
   describe 'GET #show' do
-    let(:article) { Article.create(title: 'title', body: 'body body') }
+    let!(:article) { create(:article) }
+    let(:article_image) { create(:article_image) }
 
     before do
       get :show, params: {id: article}
@@ -30,6 +31,10 @@ RSpec.describe Admin::ArticlesController do
 
     it 'should assigns @article' do
       expect(assigns(:article)).to eq(article)
+    end
+
+    it 'should assigns @images' do
+      expect(assigns(:images)).to eq (article.article_images)
     end
 
     it 'should render show template' do
@@ -65,6 +70,13 @@ RSpec.describe Admin::ArticlesController do
         post :create, params: { article: attributes_for(:article) }
         expect(response).to redirect_to admin_article_path(assigns(:article))
       end
+
+      # it 'create article with image' do
+      #   uploaded_file = fixture_file_upload('tmp/image.jpg', 'image/jpeg')
+      #   post :create, params: { article: attributes_for(:article).merge(article_image: { file: uploaded_file }) }
+      #   expect(response).to redirect_to admin_article_path(assigns(:article))
+      #   expect(File.exist?("#{Rails.root}/public/files/articles/1/1.jpg")).to be true
+      # end
     end
 
     context 'Validate Not Good' do
