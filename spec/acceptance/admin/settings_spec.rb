@@ -1,9 +1,14 @@
-require 'rails_helper'
+require_relative '../acceptance_helper'
 
-RSpec.feature 'Settings', type: feature do
+feature 'Settings' do
+  let(:user) { create(:user) }
+  
+  before do
+    sign_in(user)
+  end
+  
   scenario 'index page, see form' do
     visit admin_settings_path
-
     expect(page).to have_selector("input[name='setting[image_sizes]']")
   end
 

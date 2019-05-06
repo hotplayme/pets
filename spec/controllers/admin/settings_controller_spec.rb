@@ -2,6 +2,11 @@ require 'rails_helper'
 
 RSpec.describe Admin::SettingsController do
 
+  let(:user) { create :user }
+  before do
+    sign_in user
+  end
+
   describe 'GET #index' do
     it 'should return status 200' do
       get :index

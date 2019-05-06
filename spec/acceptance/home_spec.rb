@@ -1,4 +1,4 @@
-require 'rails_helper'
+require_relative 'acceptance_helper'
 
 RSpec.feature 'Home', type: feature do
   it 'use visit root path' do

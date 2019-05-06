@@ -1,4 +1,10 @@
 FactoryBot.define do
+  factory :user do
+    email { 'test@admin.com' }
+    password { '12345678' }
+    password_confirmation { '12345678' }
+  end
+
   factory :setting do
     image_sizes { '240x180,300x200'}
   end

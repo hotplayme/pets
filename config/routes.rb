@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
+  devise_for :users
   root 'home#index'
   get '/articles', to: 'articles#index', as: :articles
   get '/articles/:id/:slug', to: 'articles#show', as: :article
 
+
+
+  get '/admin', to: 'admin#index', as: :admin
   namespace :admin do
     resources :articles
     resources :settings

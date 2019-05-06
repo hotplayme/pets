@@ -21,6 +21,7 @@ gem 'jbuilder', '~> 2.5'
 
 # Use ActiveStorage variant
 gem 'mini_magick', '~> 4.8'
+gem 'devise'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -39,6 +40,7 @@ end
 
 group :test do
   gem 'shoulda-matchers'
+  gem 'database_cleaner'
 end
 
 group :development do

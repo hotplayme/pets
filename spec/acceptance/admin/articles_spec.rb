@@ -1,6 +1,11 @@
-require 'rails_helper'
+require_relative '../acceptance_helper'
 
-RSpec.feature 'Articles', type: feature do
+feature 'Article' do
+  let(:user) { create(:user) }
+  
+  before do
+    sign_in(user)
+  end
 
   scenario "index page, User see all articles" do
     article = create(:article)

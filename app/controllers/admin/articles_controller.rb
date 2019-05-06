@@ -1,4 +1,4 @@
-class Admin::ArticlesController < ApplicationController
+class Admin::ArticlesController < AdminController
   
   def index
     @articles = Article.order("id DESC")
