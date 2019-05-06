@@ -71,12 +71,17 @@ RSpec.describe Admin::ArticlesController do
         expect(response).to redirect_to admin_article_path(assigns(:article))
       end
 
-      # it 'create article with image' do
-      #   uploaded_file = fixture_file_upload("#{Rails.root}/spec/tmp/image.jpg", 'image/jpeg')
-      #   post :create, params: { article: attributes_for(:article).merge(image: uploaded_file ) }
-      #   expect(response).to redirect_to admin_article_path(assigns(:article))
-      #   expect(File.exist?("#{Rails.root}/public/files/articles/1/1.jpg")).to be true
-      # end
+      it 'create article with image' do
+        uploaded_file = fixture_file_upload("#{Rails.root}/spec/tmp/image.jpg", 'image/jpeg')
+        uploaded_file2 = fixture_file_upload("#{Rails.root}/spec/tmp/image.jpg", 'image/jpeg')
+
+        post :create, params: { article: attributes_for(:article).merge(image:  [uploaded_file, uploaded_file2] ) }
+        expect(response).to redirect_to admin_article_path(assigns(:article))
+        expect(File.exist?("#{Rails.root}/public/files/articles/#{Article.last.id}/#{Article.last.images.last.file}")).to be true
+        Setting.last.image_sizes.split(',').each do |size|
+          expect(File.exist?("#{Rails.root}/public/files/articles/#{Article.last.id}/#{size}/#{Article.last.images.last.file}")).to be true
+        end
+      end
     end
 
     context 'Validate Not Good' do
@@ -156,6 +161,15 @@ RSpec.describe Admin::ArticlesController do
     it 'redirect to articles path' do
       delete :destroy, params: { id: article }
       expect(response).to redirect_to admin_articles_path
+    end
+
+    it 'delete article with images' do
+      uploaded_file = fixture_file_upload("#{Rails.root}/spec/tmp/image.jpg", 'image/jpeg')
+      uploaded_file2 = fixture_file_upload("#{Rails.root}/spec/tmp/image.jpg", 'image/jpeg')
+      post :create, params: { article: (attributes_for(:article).merge(image:  [uploaded_file, uploaded_file2]))   }
+      expect { delete :destroy, params: { id: Article.last } }.to change(Article, :count).by(-1).and change(Image, :count).by(-2)
+      expect(File.exist?("#{Rails.root}/public/files/articles/#{Article.last.id}")).to_not eq true
+
     end
   end
 

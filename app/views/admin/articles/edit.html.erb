@@ -5,3 +5,4 @@
   <p><%= f.label :slug %><%= f.text_field :slug %></p>
   <p><%= f.submit 'Save' %></p>
 <% end %>
+<p><%= link_to 'Delete', admin_article_path(@article), method: :delete, data: { confirm: 'Are you sure?' } %></p>

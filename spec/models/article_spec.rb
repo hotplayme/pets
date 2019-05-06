@@ -12,4 +12,11 @@ RSpec.describe Article, type: :model do
   it { should validate_length_of(:slug).is_at_least(5) }
   it { should have_many :images }
 
+  let!(:article) { create(:article) }
+  let(:image) { create(:image) }
+
+  it 'Delete Article, delete all images' do
+    
+  end
+
 end

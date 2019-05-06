@@ -54,7 +54,10 @@ class Admin::ArticlesController < ApplicationController
   end
 
   def destroy
+    require 'fileutils'
     @article = Article.find(params[:id])
+    @article.images.destroy_all
+    FileUtils.rm_rf(Rails.root.to_s+'/public/files/articles/'+@article.id.to_s)
     @article.destroy
     redirect_to admin_articles_path
   end
