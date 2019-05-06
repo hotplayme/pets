@@ -18,14 +18,17 @@ class Admin::ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
+    @article.id = Article.last.id + rand(10..20) if Article.last
+    
     if @article.save
       if params[:article][:image].present?
         params[:article][:image].each do |file|
           rnd = (0...8).map { (65 + rand(26)).chr }.join.downcase
           path = '/files/articles/'+@article.id.to_s+'/'
-          bytes = File.size(file.tempfile)
+          # bytes = File.size(file.tempfile)
           image = @article.images.create(file: rnd+'.jpg', path: path)
           image.upload(file)
+          image.create_sizes
         end
       end
       if @article.images.count > 0
@@ -58,7 +61,7 @@ class Admin::ArticlesController < ApplicationController
 
   private
   def article_params
-    params.require(:article).permit(:title, :body)
+    params.require(:article).permit(:title, :body, :preview_text, :slug)
   end
 
 end

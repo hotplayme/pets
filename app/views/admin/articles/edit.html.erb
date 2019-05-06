@@ -1,5 +1,7 @@
 <%= form_for @article, url: admin_article_path(@article) do |f| %>
   <p><%= f.label :title %><%= f.text_field :title %></p>
   <p><%= f.label :body %><%= f.text_area :body %></p>
+  <p><%= f.label :preview_text %><%= f.text_area :preview_text %></p>
+  <p><%= f.label :slug %><%= f.text_field :slug %></p>
   <p><%= f.submit 'Save' %></p>
 <% end %>

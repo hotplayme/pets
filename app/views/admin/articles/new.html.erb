@@ -2,6 +2,8 @@
 <%= form_for @article, url: admin_articles_path, method: :post do |f| %>
   <p><%= f.label :title %><%= f.text_field :title %></p>
   <p><%= f.label :body %><%= f.text_area :body %></p>
+  <p><%= f.label :preview_text %><%= f.text_area :preview_text %></p>
+  <p><%= f.label :slug %><%= f.text_field :slug %></p>
   <p><%= f.file_field :image, multiple: true %></p>
   <p><%= f.submit 'Add' %></p>
 <% end %>

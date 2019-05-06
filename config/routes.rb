@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root 'home#index'
-  resources :articles, only: [:index, :show]
+  get '/articles', to: 'articles#index', as: :articles
+  get '/articles/:id/:slug', to: 'articles#show', as: :article
 
   namespace :admin do
     resources :articles

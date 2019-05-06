@@ -1,0 +1,75 @@
+<div class="blog_wrap">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="news_wrapp">
+          <div class="row">
+              <div class="col-12">
+                <div class="tabs">
+                    <div class="tabs__caption row no-gutters">
+                      <p class="dn_desk">Категории</p>
+                      <div class="active tab_in"><span>Категория 1</span></div>
+                      <div class="tab_in"><span>Категория 2</span></div>
+                      <div class="tab_in"><span>Категория 3</span></div>
+                      <div class="tab_in"><span>Категория 4</span></div>
+                      <div class="tab_in"><span>Категория 5</span></div>
+                      <div class="tab_in"><span>Категория 6</span></div>
+                      <div class="tab_in"><span>Категория 6</span></div>
+                    </div>
+                    <div class="tabs__content row">
+                        <% @articles.each do |article| %>
+                          <div class="col_30">
+                            <div class="shadow_block">
+                              <div class="item_inner">
+                                <a href="<%= article_path(article, article.slug) %>" class="item_a">
+                                  <%= image_tag article.main_thumb %>
+                                  <div class="text_item flex">
+                                    <h3><%= article.title %></h3>
+                                    <p><%= article.created_at %></p>
+                                  </div>
+                                </a>
+                              </div>
+                              <div class="text">
+                                <p><%= article.preview_text %></p>
+                                <%= link_to 'Дальше', article_path(article, article.slug) %>
+                              </div>
+                            </div>
+                          </div>
+                        <% end %>
+                    </div>
+                  </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="pogination_desk">
+                <div class="back">
+                  <p></p>
+                </div>
+                <div class="number active">
+                  <p>1</p>
+                </div>
+                <div class="number">
+                  <p>2</p>
+                </div>
+                <div class="number">
+                  <p>3</p>
+                </div>
+                <div class="dots">
+                  <p>...</p>
+                </div>
+                <div class="number">
+                  <p>15</p>
+                </div>
+                <div class="next">
+                  <p></p>
+                </div>
+              </div>
+              <div class="pogination_mob">
+                <p>Дальше</p>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

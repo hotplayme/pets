@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe HomeController do
 
   describe 'GET #index' do
-    let (:article) { Article.create(title: 'title title', body: 'body body') }
+    let (:article) { create(:article) }
     before do
       get :index
     end

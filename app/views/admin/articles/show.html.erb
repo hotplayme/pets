@@ -1,6 +1,8 @@
 <h2><%= @article.title %></h2>
+<p>Preview Text: <%= @article.preview_text %></p>
+<p>Slug: <%= @article.slug %></p>
 <p><%= @article.body.html_safe %></p>
 <% @images.each do |image| %>
-  <p><%= image_tag "/files/articles/#{@article.id}/#{image.file}.jpg" %></p>
+  <p><%= image_tag "/files/articles/#{@article.id}/#{image.file}" %></p>
 <% end -%>
 <p><%= link_to 'Edit', edit_admin_article_path(@article) %></p>

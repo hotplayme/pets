@@ -4,7 +4,7 @@ RSpec.describe ArticlesController do
   
   describe "GET index" do
     
-    let(:article) { Article.create(title: 'title title', body: 'body body') }
+    let(:article) { create(:article) }
     
     before do
       get :index
@@ -26,10 +26,10 @@ RSpec.describe ArticlesController do
 
   describe "GET show" do
 
-    let!(:article) { Article.create(title: 'title title', body: 'body body') }
+    let!(:article) { create(:article) }
 
     before do
-      get :show, params: {id: article}
+      get :show, params: {id: article, slug: article.slug}
     end
 
     it 'should response status 200' do
