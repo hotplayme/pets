@@ -1,0 +1,5 @@
+<h2>Settings</h2>
+<%= form_for @setting, url: admin_setting_path(@setting), method: :patch do |f| %>
+<p><%= f.label :image_sizes %><%= f.text_field :image_sizes %></p>
+<p><%= f.submit 'Update' %></p>
+<% end %>

@@ -1,13 +1,14 @@
 FactoryBot.define do
+  factory :setting do
+  end
+
   factory :image do
     file { (0...8).map { (65 + rand(26)).chr }.join.downcase }
     article
   end
 
   factory :comment do
-    
   end
-
   
   factory :article do
     title { "Article Title" }
@@ -18,5 +19,4 @@ FactoryBot.define do
     title {"Tit"}
     body {"Body"}
   end
-
 end
