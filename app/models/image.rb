@@ -1,5 +1,4 @@
-class ArticleImage < ApplicationRecord
-  
+class Image < ApplicationRecord
   validates_presence_of :file
   belongs_to :article
 
@@ -16,5 +15,4 @@ class ArticleImage < ApplicationRecord
       f.write(file.read)
     end
   end
-
 end

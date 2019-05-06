@@ -34,7 +34,7 @@ RSpec.describe Admin::ArticlesController do
     end
 
     it 'should assigns @images' do
-      expect(assigns(:images)).to eq (article.article_images)
+      expect(assigns(:images)).to eq (article.images)
     end
 
     it 'should render show template' do

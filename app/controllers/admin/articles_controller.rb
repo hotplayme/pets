@@ -1,12 +1,12 @@
 class Admin::ArticlesController < ApplicationController
   
   def index
-    @articles = Article.all
+    @articles = Article.order("id DESC")
   end
 
   def show
     if @article = Article.find_by_id(params[:id])
-      @images = @article.article_images
+      @images = @article.images
     else
       redirect_to admin_articles_path
     end
@@ -19,11 +19,17 @@ class Admin::ArticlesController < ApplicationController
   def create
     @article = Article.new(article_params)
     if @article.save
-      if params[:article][:article_image].present?
-        params[:article][:article_image].each do |image|
-          article_image = @article.article_images.create(file: (0...8).map { (65 + rand(26)).chr }.join.downcase)
-          article_image.upload(image)
+      if params[:article][:image].present?
+        params[:article][:image].each do |file|
+          rnd = (0...8).map { (65 + rand(26)).chr }.join.downcase
+          path = '/files/articles/'+@article.id.to_s+'/'
+          bytes = File.size(file.tempfile)
+          image = @article.images.create(file: rnd+'.jpg', path: path)
+          image.upload(file)
         end
+      end
+      if @article.images.count > 0
+        @article.update(main_thumb_id: @article.images.sample.id)
       end
       redirect_to admin_article_path(@article)
     else

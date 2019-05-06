@@ -1,5 +1,18 @@
 <h2>Articles</h2>
 <p><%= link_to 'Add', new_admin_article_path %></p>
-<% @articles.each do |article| %>
-  <p><%= link_to article.title, admin_article_path(article) %></p>
-<% end %>
+<table border=1>
+  <tr bgcolor='yellow'>
+    <td>ID</td>
+    <td>Title</td>
+    <td>Image</td>
+    <td>Edit</td>
+  </tr>
+  <% @articles.each do |article| %>
+    <tr>
+      <td><%= article.id %></td>
+      <td><%= link_to article.title, article_path(article) %></td>
+      <td><%= image_tag article.main_thumb %></td>
+      <td><%= link_to 'Edit', edit_admin_article_path(article) %></td>
+    </tr>
+  <% end %>
+</table>

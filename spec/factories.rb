@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :article_image do
+  factory :image do
     file { (0...8).map { (65 + rand(26)).chr }.join.downcase }
     article
   end
