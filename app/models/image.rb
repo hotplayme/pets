@@ -18,7 +18,7 @@ class Image < ApplicationRecord
   def upload(file)
     require "fileutils"
     upload_file = Rails.root.join('public', 'files', 'articles',  self.article.id.to_s, "#{self.file}")
-    FileUtils::mkdir_p File.dirname upload_file
+    FileUtils::mkdir_p File.dirname(upload_file)
     File.open(upload_file, 'wb') do |f|
       f.write(file.read)
     end
@@ -27,8 +27,8 @@ class Image < ApplicationRecord
   def create_sizes
     sizes = Setting.first_or_create.image_sizes.split(',')
     sizes.each do |size|
-      Dir.mkdir(Rails.root.to_s + '/public' + self.path + size) unless File.exists?(Rails.root.to_s + '/public' + self.path + size)
-      system("convert #{Rails.root.to_s}/public#{self.path}#{self.file} -resize #{size}^ -gravity center -extent #{size} -quality 85 #{Rails.root.to_s}/public#{self.path}#{size}/#{self.file}")
+      Dir.mkdir(Rails.root.join('public', 'files', 'articles', self.article.id.to_s, size)) unless File.exists?(Rails.root.join('public', 'files', 'articles', self.article.id.to_s, size))
+      system("convert #{Rails.root.join('public', 'files', 'articles', self.article.id.to_s, self.file)} -resize #{size}^ -gravity center -extent #{size} -quality 85 #{Rails.root.join('public', 'files', 'articles', self.article.id.to_s, size, self.file)}")
     end
   end
 end
