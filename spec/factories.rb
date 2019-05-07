@@ -10,7 +10,7 @@ FactoryBot.define do
   end
 
   factory :image do
-    file { (0...8).map { (65 + rand(26)).chr }.join.downcase }
+    file { (0...8).map { (65 + rand(26)).chr }.join.downcase + '.jpg' }
     article
   end
 

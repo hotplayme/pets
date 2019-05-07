@@ -42,11 +42,23 @@ class Admin::ArticlesController < AdminController
 
   def edit
     @article = Article.find(params[:id])
+    @images = @article.images
+    @sizes = Setting.first_or_create.image_sizes.split(',')
   end
 
   def update
     @article = Article.find(params[:id])
     if @article.update(article_params)
+      if params[:article][:image].present?
+        params[:article][:image].each do |file|
+          rnd = (0...8).map { (65 + rand(26)).chr }.join.downcase
+          path = '/files/articles/'+@article.id.to_s+'/'
+          # bytes = File.size(file.tempfile)
+          image = @article.images.create(file: rnd+'.jpg', path: path)
+          image.upload(file)
+          image.create_sizes
+        end
+      end
       redirect_to admin_article_path(@article)
     else
       render :edit

@@ -62,11 +62,13 @@ feature 'Article' do
     fill_in 'article_title', with: 'New Article Title'
     fill_in 'article_body',  with: 'New Article Body'
     fill_in 'article_preview_text',  with: 'New Article Preview'
+    fill_in 'article_slug',  with: 'New Article Slug'
     click_on 'Save'
 
     expect(page).to have_text('New Article Title')
     expect(page).to have_text('New Article Body')
     expect(page).to have_text('New Article Preview')
+    expect(page).to have_text('New Article Slug')
     expect(page).to have_current_path(admin_article_path(article))
   end
 

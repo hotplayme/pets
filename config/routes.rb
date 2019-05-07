@@ -12,5 +12,6 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :articles
     resources :settings
+    resources :images, only: [:destroy]
   end
 end

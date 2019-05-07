@@ -1,0 +1,15 @@
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <title>Admin</title>
+  </head>
+  <body>
+      <%= link_to 'Articles', admin_articles_path %> / <%= link_to 'Settings', admin_settings_path %>
+      <%= yield %>
+</body>
+</html>

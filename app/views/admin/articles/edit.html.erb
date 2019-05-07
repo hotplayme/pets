@@ -4,6 +4,29 @@
     <p><%= f.label :preview_text %><%= f.text_area :preview_text %></p>
     <p><%= f.label :slug %><%= f.text_field :slug %></p>
     <p><%= f.label :body %><%= f.text_area :body, size: '200x30' %></p>
+    <p><%= f.file_field :image, multiple: true %></p>
     <p><%= f.submit 'Save' %></p>
   <% end %>
   <p><%= link_to 'Delete', admin_article_path(@article), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+  <h2>Images</h2>
+  <table border=1>
+    <tr bgcolor="yellow">
+      <td>ID</td>
+      <td>orig</td>
+      <% @sizes.each do |size| %>
+        <td><%= size %></td>
+      <% end %>
+      <td>delete</td>
+    </tr>
+    <% @images.each do |image| %>
+      <tr>
+        <td><%= image.id %></td>
+        <td><%= image_tag image.url, width: 200 %></td>
+        <% @sizes.each do |size| %>
+          <td><%= image_tag image.url(size), width: 100 %></td>
+        <% end %>
+        <td><%= link_to 'delete', admin_image_path(image), method: :delete %></td>
+      </tr>
+      <p></p>
+    <% end %>
+  </table>

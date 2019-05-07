@@ -2,6 +2,14 @@ class Image < ApplicationRecord
   validates_presence_of :file
   belongs_to :article
 
+  def url(size='orig')
+    if size == 'orig'
+      return self.path + self.file
+    else
+      return self.path + size + '/' + self.file
+    end
+  end
+
   def self.validate_image(file)
     require 'mime/types'
     MIME::Types.type_for(file).first.try(:media_type) == 'image'
