@@ -15,6 +15,8 @@ FactoryBot.define do
   end
 
   factory :comment do
+    name { 'commenter' }
+    body { 'comment body' }
   end
   
   factory :article do

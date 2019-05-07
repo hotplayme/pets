@@ -3,6 +3,7 @@ class Article < ApplicationRecord
   validates_length_of [:title, :body, :preview_text, :slug], minimum: 5
   
   has_many :images
+  has_many :comments
 
   def main_thumb
     return '/files/zaglushka.jpg' if self.images.count == 0

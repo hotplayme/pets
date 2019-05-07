@@ -39,24 +39,34 @@
         </div>
 
         <div class="coment_block">
-          <div class="row">
-            <div class="col-lg-1 col-sm-2"> <img src="/img/coment.png" alt=""></div>
-            <div class="col-lg-11 col-sm-10">
-              <p class="m_700">Инна <span class="m_300">3 минуты назад</span></p>
-              <p> Тем не менее, группа независимых экологов утверждает, что строительство предприятия нанесет огромный вред городской экологии, будет способствовать росту заболеваемости  и ухудшению санитарно-эпидемиологической обстановки в городе.</p>
+          <% @comments.each do |comment| %>
+            <div class="row">
+              <div class="col-lg-1 col-sm-2">
+                <img src="/img/coment.png" alt="">
+              </div>
+              <div class="col-lg-11 col-sm-10">
+                <p class="m_700"><%= comment.name %> <span class="m_300">3 минуты назад</span></p>
+                <p> <%= comment.body %></p>
+              </div>
             </div>
-          </div>
+          <% end %>
+          
         </div>
         <div class="coment_form_wpapp">
           <div class="row">
             <div class="col-lg-12 coment_form">
-                <form action="send.php" class="popupform" id="form11" method="post">
-                    <h5>Добавить комментарий</h5>
-                    <input class="name" type="text" name="name" required placeholder="Введите ваше имя">
-                  <textarea name="mess" required placeholder="Добавить комментарий"></textarea>
-                      <input class="consult" type="submit" value="Отправить" name="email_submit">
-                    <input type="hidden" name="whatForm" value="Отправить">
-                </form>
+              <%= form_for @comment, url: article_comments_path(@article) do |f| %>
+                <!-- <form action="send.php" class="popupform" id="form11" method="post"> -->
+                <h5>Добавить комментарий</h5>
+                <%= f.text_field :name, class: 'name', placeholder: 'Ваше Имя' %>
+                <!-- <input class="name" type="text" name="name" required placeholder="Введите ваше имя"> -->
+                <%= f.text_area :body, placeholder: 'Комментарий' %>
+                <!-- <textarea name="mess" required placeholder="Добавить комментарий"></textarea> -->
+                <%= f.submit class: 'consult', value:'Добавить' %>
+                <!-- <input class="consult" type="submit" value="Отправить" name="email_submit"> -->
+                <input type="hidden" name="whatForm" value="Отправить">
+                <!-- </form> -->
+              <% end %>
             </div>
           </div>
         </div>
