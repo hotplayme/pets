@@ -40,6 +40,10 @@ RSpec.describe ArticlesController do
       expect(assigns(:article)).to eq(article)
     end
 
+    it 'assigns @related' do
+      expect(assigns(:related)).to eq([article])
+    end
+
     it 'render template show' do
       expect(response).to render_template(:show)
     end

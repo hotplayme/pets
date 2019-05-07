@@ -6,6 +6,7 @@ class ArticlesController < ApplicationController
 
   def show
     @article = Article.find(params[:id])
+    @related = Article.order("random()").limit(3)
   end
 
 end
