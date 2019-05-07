@@ -16,15 +16,17 @@
       <% @sizes.each do |size| %>
         <td><%= size %></td>
       <% end %>
+      <td>set main</td>
       <td>delete</td>
     </tr>
     <% @images.each do |image| %>
-      <tr>
+      <tr bgcolor="<%= 'green' if @article.main_thumb_id == image.id %>">
         <td><%= image.id %></td>
         <td><%= image_tag image.url, width: 200 %></td>
         <% @sizes.each do |size| %>
           <td><%= image_tag image.url(size), width: 100 %></td>
         <% end %>
+        <td><%= link_to 'set main', admin_image_set_main_path(image, article: @article.id) %></td>
         <td><%= link_to 'delete', admin_image_path(image), method: :delete %></td>
       </tr>
       <p></p>

@@ -8,8 +8,11 @@ class Article < ApplicationRecord
   def main_thumb
     return '/files/zaglushka.jpg' if self.images.count == 0
     if self.main_thumb_id
-      image = Image.find_by_id(self.main_thumb_id)
-      return image.path + image.file
+      if image = Image.find_by_id(self.main_thumb_id)
+        return image.path + image.file
+      else
+        return '/files/zaglushka.jpg'
+      end  
     else
       return '/files/zaglushka.jpg'
     end
