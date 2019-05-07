@@ -21,7 +21,7 @@ set :deploy_to, "/home/deploy/33sobaki"
 # set :pty, true
 
 # Default value for :linked_files is []
-append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'public/uploads'
+append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'public/uploads', 'public/files', 'public/img', 'public/js', 'public/style'
 set :keep_releases, 5
 append :linked_files, 'config/database.yml', 'config/secrets.yml'
 
