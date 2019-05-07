@@ -1,9 +1,20 @@
-<h2>Add New Article</h2>
-<%= form_for @article, url: admin_articles_path, method: :post do |f| %>
-  <p><%= f.label :title %><%= f.text_field :title %></p>
-  <p><%= f.label :body %><%= f.text_area :body %></p>
-  <p><%= f.label :preview_text %><%= f.text_area :preview_text %></p>
-  <p><%= f.label :slug %><%= f.text_field :slug %></p>
-  <p><%= f.file_field :image, multiple: true %></p>
-  <p><%= f.submit 'Add' %></p>
-<% end %>
+<center>
+  <h2>Add New Article</h2>
+  <p>
+    <% if @article.errors.full_messages.any? %>
+      <% @article.errors.full_messages.each do |error_message| %>
+        <%= error_message if @article.errors.full_messages.first == error_message %> <br />
+      <% end %>
+    <% end %>
+  </p>
+  <%= form_for @article, url: admin_articles_path, method: :post do |f| %>
+    <p><%= f.label :title %><%= f.text_field :title %></p>
+    <p><%= f.label :slug %><%= f.text_field :slug %></p>
+    <p><%= f.label :preview_text %><%= f.text_area :preview_text %></p>
+    <p><%= f.label :body %><%= f.text_area :body, size: '200x30' %></p>
+    
+    
+    <p><%= f.file_field :image, multiple: true %></p>
+    <p><%= f.submit 'Add' %></p>
+  <% end %>
+</center>
