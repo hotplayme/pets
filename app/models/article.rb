@@ -5,11 +5,15 @@ class Article < ApplicationRecord
   has_many :images
   has_many :comments
 
-  def main_thumb
+  def main_thumb(size='orig')
     return '/files/zaglushka.jpg' if self.images.count == 0
     if self.main_thumb_id
       if image = Image.find_by_id(self.main_thumb_id)
-        return image.path + image.file
+        if size == 'orig'
+          return image.path + image.file
+        else
+          return image.path + size + '/' + image.file
+        end
       else
         return '/files/zaglushka.jpg'
       end  

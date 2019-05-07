@@ -78,7 +78,7 @@
                 <div class="shadow_block">
                   <div class="item_inner">
                     <a href="<%= article_path(article, article.slug) %>">
-                      <%= image_tag article.main_thumb %>
+                      <%= image_tag article.main_thumb('480x270') %>
                       <div class="text_item flex">
                         <h3><%= article.title %></h3>
                         <p><%= article.created_at %></p>
